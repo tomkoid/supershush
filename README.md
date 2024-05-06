@@ -32,7 +32,7 @@ To configure AudStopper, you can edit the configuration file located at `~/.conf
 
 ```toml
 # Enable MPC pausing 
-mpc = true 
+mpc = false
 
 # Enable playerctl stopping 
 playerctl = true
