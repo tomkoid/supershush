@@ -2,7 +2,6 @@ package config
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"os"
 
@@ -58,8 +57,6 @@ func GetConfig() Config {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Printf("config: %+v\n", config)
 
 	return config
 }
