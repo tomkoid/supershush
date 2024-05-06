@@ -37,9 +37,8 @@ func readConfigFile(configFilePath string) (string, error) {
 func GetConfig() Config {
 	// default config
 	var config Config = Config{
-		PollRateMs: 20,
-		Mpc:        true,
-		PlayerCtl:  true,
+		Mpc:       true,
+		PlayerCtl: true,
 	}
 
 	userConfigDir, err := os.UserConfigDir()

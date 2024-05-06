@@ -7,9 +7,8 @@ import (
 	"os/exec"
 	"os/signal"
 	"syscall"
-	"time"
 
-	"github.com/jfreymuth/pulse"
+	"mrogalski.eu/go/pulseaudio"
 
 	"codeberg.org/tomkoid/audiochanger/internal/config"
 )
@@ -42,7 +41,7 @@ func stopAudio(config *config.Config) {
 	}
 }
 
-func handleCleanup(pulseClient *pulse.Client) {
+func handleCleanup(pulseClient *pulseaudio.Client) {
 	c := make(chan os.Signal)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
@@ -59,8 +58,10 @@ func handleCleanup(pulseClient *pulse.Client) {
 func main() {
 	config := config.GetConfig()
 
+	// test()
+
 	// Create a PulseAudio context
-	c, err := pulse.NewClient()
+	c, err := pulseaudio.NewClient()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,37 +70,46 @@ func main() {
 
 	defer c.Close()
 
-	// Get the default sink (audio source)
-	defaultSink, err := c.DefaultSink()
+	outputs, activeIndex, err := c.Outputs()
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// Get the default sink (audio source)
+	var defaultSink pulseaudio.Output = outputs[activeIndex]
+
 	// Store the initial sink name
-	initialSinkName := defaultSink.Name()
+	var initialSinkName string = defaultSink.CardID
+
+	updateChan, err := c.Updates()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Monitor the default sink for changes
 	for {
+		<-updateChan
+
 		// Get the new default sink
-		defaultSink, err = c.DefaultSink()
+		outputs, activeIndex, err := c.Outputs()
 		if err != nil {
 			log.Fatal(err)
 		}
 
+		defaultSink = outputs[activeIndex]
+
 		// Check if the sink name has changed
-		if defaultSink.Name() != initialSinkName {
+		if defaultSink.CardID != initialSinkName {
 			fmt.Printf(
 				"Audio source changed from %s to %s\n",
 				initialSinkName,
-				defaultSink.Name(),
+				defaultSink.CardID,
 			)
 
 			// stop audio if mpc or playerctl is running
 			stopAudio(&config)
 
-			initialSinkName = defaultSink.Name()
+			initialSinkName = defaultSink.CardID
 		}
-
-		time.Sleep(time.Duration(config.PollRateMs) * time.Millisecond)
 	}
 }
