@@ -9,7 +9,7 @@ import (
 )
 
 func StopAudio(config *config.Config) {
-	log.Println("Stopping audio")
+	log.Println("Stopping audio.")
 	// if mpc binary exists on system
 	if _, err := exec.LookPath("mpc"); err == nil && config.Mpc {
 		err = tools.RunCommand("mpc", "pause")

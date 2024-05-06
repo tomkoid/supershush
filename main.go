@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"mrogalski.eu/go/pulseaudio"
@@ -40,6 +39,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Println("Starting audio monitoring.")
+
 	// Monitor the default sink for changes
 	for {
 		<-updateChan
@@ -54,7 +55,7 @@ func main() {
 
 		// Check if the sink name has changed
 		if defaultSink.CardID != initialSinkName {
-			fmt.Printf(
+			log.Printf(
 				"Audio source changed from %s to %s\n",
 				initialSinkName,
 				defaultSink.CardID,
