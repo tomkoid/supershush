@@ -36,7 +36,7 @@ func readConfigFile(configFilePath string) (string, error) {
 func GetConfig() Config {
 	// default config
 	var config Config = Config{
-		Mpc:       true,
+		Mpc:       false,
 		PlayerCtl: true,
 	}
 
