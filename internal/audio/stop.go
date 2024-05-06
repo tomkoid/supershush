@@ -4,8 +4,8 @@ import (
 	"log"
 	"os/exec"
 
-	"codeberg.org/tomkoid/audiochanger/internal/config"
-	"codeberg.org/tomkoid/audiochanger/internal/tools"
+	"codeberg.org/tomkoid/audstopper/internal/config"
+	"codeberg.org/tomkoid/audstopper/internal/tools"
 )
 
 func StopAudio(config *config.Config) {

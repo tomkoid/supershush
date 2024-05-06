@@ -1,4 +1,4 @@
-module codeberg.org/tomkoid/audiochanger
+module codeberg.org/tomkoid/audstopper
 
 go 1.22.2
 
