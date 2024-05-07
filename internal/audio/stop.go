@@ -8,7 +8,7 @@ import (
 	"codeberg.org/tomkoid/audstopper/internal/tools"
 )
 
-func StopAudio(config *config.Config) {
+func stopAudio(config *config.Config) {
 	log.Println("Stopping audio.")
 	// if mpc binary exists on system
 	if _, err := exec.LookPath("mpc"); err == nil && config.Mpc {
