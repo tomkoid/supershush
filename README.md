@@ -5,7 +5,8 @@
 AudStopper is a daemon that is designed to prevent audio from continuing to play when the output device is changed, such as when switching from headphones to speakers.
 
 # Installation
- 
+
+To stop audio playback when the output device is changed, AudStopper **requires** the `playerctl` package if the option in the config is enabled.
 ## From Source
 
 To compile AudStopper from source, you'll need to have Go installed on your system. You can download the Go installer from the official Go website.
