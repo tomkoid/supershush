@@ -13,7 +13,7 @@ To compile AudStopper from source, you'll need to have Go installed on your syst
 Once you have Go installed, run the following command to install audstopper:
 
 ```bash
-go install codeberg.org/tomkoid/audstopper@latest
+go install codeberg.org/tomkoid/audstopper@0.1.0
 ```
 
 # Running
