@@ -2,12 +2,13 @@ package tools
 
 import "os/exec"
 
-func RunCommand(name string, arg ...string) error {
+func RunCommand(name string, arg ...string) ([]byte, error) {
 	cmd := exec.Command(name, arg...)
 
-	if err := cmd.Run(); err != nil {
-		return err
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return nil, err
 	}
 
-	return nil
+	return output, nil
 }

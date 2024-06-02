@@ -8,6 +8,11 @@ import (
 	"codeberg.org/tomkoid/audstopper/internal/config"
 )
 
+type mutedSink struct {
+	Name string
+	Playing
+}
+
 func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 	outputs, activeIndex, err := c.Outputs()
 	if err != nil {
@@ -26,7 +31,11 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 		log.Fatal(err)
 	}
 
+	/// Muted sink
+	var ms mutedSink
+
 	log.Println("Starting audio monitoring.")
+	log.Println(ms.Name)
 
 	// Monitor the default sink for changes
 	for {
@@ -49,8 +58,27 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 				defaultSink.CardID,
 			)
 
+			if ms.Name == defaultSink.CardID {
+				log.Println(
+					"Audio was muted, so unmuted it.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+				)
+
+				initialSinkName = defaultSink.CardID
+
+				ms.Name = ""
+				resumeAudio(config, ms.Players)
+				continue
+			}
+
 			// stop audio if mpc or playerctl is running
-			stopAudio(config)
+			playing := stopAudio(config)
+			log.Printf("Playing: %t\n", playing.Playing)
+			if playing.Playing {
+				ms.Name = initialSinkName
+				ms.Players = playing.Players
+			}
+			log.Printf("1: %s\n", ms.Name)
+			log.Printf("2: %s\n", defaultSink.CardID)
 
 			initialSinkName = defaultSink.CardID
 		}
