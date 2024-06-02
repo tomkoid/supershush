@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://codeberg.org/tomkoid/supershush">
-    <img src="assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo.png" alt="Logo" width="168" height="168">
   </a>
 
   <h3 align="center">SuperShush</h3>
