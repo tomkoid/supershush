@@ -1,7 +1,6 @@
 package audio
 
 import (
-	"log"
 	"strings"
 
 	"codeberg.org/tomkoid/audstopper/internal/tools"
@@ -18,7 +17,6 @@ func isPlaying(player string) (bool, []string) {
 		}
 
 		if string(output) == "Playing\n" {
-			println("playerctl playing!!!!!!!!!!!!!!!!!!!!!!!!!")
 			playing = true
 			players = append(players, player)
 		}
@@ -31,12 +29,11 @@ func isPlaying(player string) (bool, []string) {
 
 		println(string(output))
 		if strings.Contains(string(output), "[playing]") {
-			println("mpc playing!!!!!!!!!!!!!!!!!!!!!!!!!")
 			playing = true
 			players = append(players, player)
 		}
 	}
 
-	log.Printf("returned from isplaying: %v", players)
+	// log.Printf("returned from isplaying: %v", players)
 	return playing, players 
 }

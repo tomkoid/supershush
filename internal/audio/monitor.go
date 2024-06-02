@@ -35,7 +35,6 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 	var ms mutedSink
 
 	log.Println("Starting audio monitoring.")
-	log.Println(ms.Name)
 
 	// Monitor the default sink for changes
 	for {
@@ -58,9 +57,9 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 				defaultSink.CardID,
 			)
 
-			if ms.Name == defaultSink.CardID {
+			if config.Resume && ms.Name == defaultSink.CardID {
 				log.Println(
-					"Audio was muted, so unmuted it.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+					"Audio was muted, unmuted it.",
 				)
 
 				initialSinkName = defaultSink.CardID
@@ -78,8 +77,8 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 				ms.Name = initialSinkName
 				ms.Players = playingPlayers
 			}
-			log.Printf("1: %s\n", ms.Name)
-			log.Printf("2: %s\n", defaultSink.CardID)
+			// log.Printf("1: %s\n", ms.Name)
+			// log.Printf("2: %s\n", defaultSink.CardID)
 
 			initialSinkName = defaultSink.CardID
 		}
