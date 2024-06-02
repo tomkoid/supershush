@@ -3,8 +3,8 @@ package audio
 import (
 	"log"
 
-	"codeberg.org/tomkoid/audstopper/internal/config"
-	"codeberg.org/tomkoid/audstopper/internal/tools"
+	"codeberg.org/tomkoid/supershush/internal/config"
+	"codeberg.org/tomkoid/supershush/internal/tools"
 )
 
 /// returns an array of players that were playing before stopped

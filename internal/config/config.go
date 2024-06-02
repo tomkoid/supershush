@@ -46,7 +46,7 @@ func GetConfig() Config {
 		log.Fatal(err)
 	}
 
-	configFilePath := userConfigDir + "/audstopper/config.toml"
+	configFilePath := userConfigDir + "/supershush/config.toml"
 
 	configStr, err := readConfigFile(configFilePath)
 	if err != nil {

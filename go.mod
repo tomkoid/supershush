@@ -1,4 +1,4 @@
-module codeberg.org/tomkoid/audstopper
+module codeberg.org/tomkoid/supershush
 
 go 1.22.2
 
