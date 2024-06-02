@@ -5,9 +5,9 @@ import (
 
 	"mrogalski.eu/go/pulseaudio"
 
-	"codeberg.org/tomkoid/audstopper/internal/audio"
-	"codeberg.org/tomkoid/audstopper/internal/config"
-	"codeberg.org/tomkoid/audstopper/internal/tools"
+	"codeberg.org/tomkoid/supershush/internal/audio"
+	"codeberg.org/tomkoid/supershush/internal/config"
+	"codeberg.org/tomkoid/supershush/internal/tools"
 )
 
 func main() {

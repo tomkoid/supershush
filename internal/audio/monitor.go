@@ -5,7 +5,7 @@ import (
 
 	"mrogalski.eu/go/pulseaudio"
 
-	"codeberg.org/tomkoid/audstopper/internal/config"
+	"codeberg.org/tomkoid/supershush/internal/config"
 )
 
 type mutedSink struct {

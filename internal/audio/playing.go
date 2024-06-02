@@ -3,7 +3,7 @@ package audio
 import (
 	"strings"
 
-	"codeberg.org/tomkoid/audstopper/internal/tools"
+	"codeberg.org/tomkoid/supershush/internal/tools"
 )
 
 func isPlaying(player string) (bool, []string) {

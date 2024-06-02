@@ -3,7 +3,7 @@ package audio
 import (
 	"os/exec"
 
-	"codeberg.org/tomkoid/audstopper/internal/config"
+	"codeberg.org/tomkoid/supershush/internal/config"
 )
 
 type Player struct {
