@@ -38,6 +38,7 @@ func GetConfig() Config {
 	var config Config = Config{
 		Mpc:       false,
 		PlayerCtl: true,
+		Resume:    false,
 	}
 
 	userConfigDir, err := os.UserConfigDir()
@@ -49,8 +50,13 @@ func GetConfig() Config {
 
 	configStr, err := readConfigFile(configFilePath)
 	if err != nil {
-		log.Println("using default config")
+		log.Println("Using default config.")
+		if err.Error() != "config file does not exist" {
+			log.Printf("config error: %s\n", err.Error())
+		}
 		return config
+	} else {
+		log.Printf("Using config from %s.\n", configFilePath)
 	}
 
 	err = toml.Unmarshal([]byte(configStr), &config)

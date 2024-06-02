@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	config := config.GetConfig()
+	cfg := config.GetConfig()
 
 	// Create a PulseAudio context
 	c, err := pulseaudio.NewClient()
@@ -23,7 +23,7 @@ func main() {
 	go tools.HandleCleanup(c)
 
 	// Start audio monitoring
-	audio.AudioMonitor(c, &config)
+	audio.AudioMonitor(c, &cfg)
 
 	defer c.Close()
 }

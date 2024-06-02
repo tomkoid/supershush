@@ -2,26 +2,30 @@ package audio
 
 import (
 	"log"
-	"os/exec"
 
 	"codeberg.org/tomkoid/audstopper/internal/config"
 	"codeberg.org/tomkoid/audstopper/internal/tools"
 )
 
-func stopAudio(config *config.Config) {
+/// returns an array of players that were playing before stopped
+func stopAudio(config *config.Config) []string {
 	log.Println("Stopping audio.")
-	// if mpc binary exists on system
-	if _, err := exec.LookPath("mpc"); err == nil && config.Mpc {
-		err = tools.RunCommand("mpc", "pause")
+
+	var players []string
+	for _, player := range listPlayers(config) {
+		currentPlaying, currentPlayers := isPlaying(player.Name)
+
+		if currentPlaying {
+			for _, playingPlayer := range currentPlayers {
+				players = append(players, playingPlayer)
+			}
+		}
+
+		_, err := tools.RunCommand(player.PauseCommand[0], player.PauseCommand[1:]...)
 		if err != nil {
 			log.Println(err)
 		}
 	}
 
-	if _, err := exec.LookPath("playerctl"); err == nil && config.PlayerCtl {
-		err = tools.RunCommand("playerctl", "pause")
-		if err != nil {
-			log.Println(err)
-		}
-	}
+	return players 
 }
