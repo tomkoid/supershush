@@ -1,13 +1,28 @@
-# SuperShush 
+<div align="center">
+  <a href="https://codeberg.org/tomkoid/supershush">
+    <img src="assets/logo.png" alt="Logo" width="168" height="168">
+  </a>
+
+  <h3 align="center">SuperShush</h3>
+
+  <p align="center">
+    Stop audio from playing when the audio output changes
+    <br />
+    <a href="https://codeberg.org/tomkoid/supershush/issues/new">Report Bug</a>
+    ·
+    <a href="https://codeberg.org/tomkoid/supershush/issues/new">Request Feature</a>
+  </p>
+</div>
 
 ## What is SuperShush?
 
 SuperShush is a daemon that is designed to prevent audio from continuing to play when the output device is changed, such as when switching from headphones to speakers.
 
-# Installation
+## Installation
 
 To stop audio playback when the output device is changed, SuperShush **requires** the `playerctl` package if the option in the config is enabled.
-## From Source
+
+### From Source
 
 To compile SuperShush from source, you'll need to have Go installed on your system. You can download the Go installer from the official Go website.
 
@@ -17,7 +32,7 @@ Once you have Go installed, run the following command to install SuperShush:
 go install codeberg.org/tomkoid/supershush@0.1.0
 ```
 
-# Running
+## Running
 
 To run supershush, simply execute the `supershush` command:
 
@@ -27,7 +42,7 @@ supershush
 
 This will start the SuperShush daemon, which will monitor audio output changes and stop audio playback when necessary.
 
-# Configuring
+## Configuring
 
 To configure SuperShush, you can edit the configuration file located at `~/.config/supershush/config.toml`. Here is an example configuration file:
 
@@ -46,10 +61,10 @@ mpc = false
 playerctl = true
 ```
 
-# License
+## License
  
 SuperShush is licensed under the MIT License. See the LICENSE file for more information.
 
-# Contributing
+## Contributing
  
 If you'd like to contribute to SuperShush, please fork the repository and submit a pull request with your changes. You can also report issues or suggest new features on the issue tracker.
