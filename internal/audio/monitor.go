@@ -10,7 +10,7 @@ import (
 
 type mutedSink struct {
 	Name string
-	Playing
+	Players []string
 }
 
 func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
@@ -65,17 +65,18 @@ func AudioMonitor(c *pulseaudio.Client, config *config.Config) {
 
 				initialSinkName = defaultSink.CardID
 
-				ms.Name = ""
 				resumeAudio(config, ms.Players)
+				ms.Name = ""
+				ms.Players = []string{}
 				continue
 			}
 
 			// stop audio if mpc or playerctl is running
-			playing := stopAudio(config)
-			log.Printf("Playing: %t\n", playing.Playing)
-			if playing.Playing {
+			playingPlayers := stopAudio(config)
+			log.Printf("Playing: %t\n", len(playingPlayers) != 0)
+			if len(playingPlayers) != 0 {
 				ms.Name = initialSinkName
-				ms.Players = playing.Players
+				ms.Players = playingPlayers
 			}
 			log.Printf("1: %s\n", ms.Name)
 			log.Printf("2: %s\n", defaultSink.CardID)

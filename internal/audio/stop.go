@@ -7,23 +7,18 @@ import (
 	"codeberg.org/tomkoid/audstopper/internal/tools"
 )
 
-type Playing struct {
-	Playing bool
-	Players []string
-}
-
-// returns if audio was playing
-func stopAudio(config *config.Config) Playing {
+/// returns an array of players that were playing before stopped
+func stopAudio(config *config.Config) []string {
 	log.Println("Stopping audio.")
 
-	var playing Playing
+	var players []string
 	for _, player := range listPlayers(config) {
-		currentPlaying, currentPlayer := isPlaying(player.Name)
+		currentPlaying, currentPlayers := isPlaying(player.Name)
 
 		if currentPlaying {
-			playing.Playing = true
-
-			playing.Players = append(playing.Players, *currentPlayer)
+			for _, playingPlayer := range currentPlayers {
+				players = append(players, playingPlayer)
+			}
 		}
 
 		_, err := tools.RunCommand(player.PauseCommand[0], player.PauseCommand[1:]...)
@@ -32,5 +27,5 @@ func stopAudio(config *config.Config) Playing {
 		}
 	}
 
-	return playing
+	return players 
 }
