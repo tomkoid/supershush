@@ -1,35 +1,35 @@
-# AudStopper
+# SuperShush 
 
-## What is AudStopper?
+## What is SuperShush?
 
-AudStopper is a daemon that is designed to prevent audio from continuing to play when the output device is changed, such as when switching from headphones to speakers.
+SuperShush is a daemon that is designed to prevent audio from continuing to play when the output device is changed, such as when switching from headphones to speakers.
 
 # Installation
 
-To stop audio playback when the output device is changed, AudStopper **requires** the `playerctl` package if the option in the config is enabled.
+To stop audio playback when the output device is changed, SuperShush **requires** the `playerctl` package if the option in the config is enabled.
 ## From Source
 
-To compile AudStopper from source, you'll need to have Go installed on your system. You can download the Go installer from the official Go website.
+To compile SuperShush from source, you'll need to have Go installed on your system. You can download the Go installer from the official Go website.
 
-Once you have Go installed, run the following command to install audstopper:
+Once you have Go installed, run the following command to install SuperShush:
 
 ```bash
-go install codeberg.org/tomkoid/audstopper@0.1.0
+go install codeberg.org/tomkoid/supershush@0.1.0
 ```
 
 # Running
 
-To run AudStopper, simply execute the audstopper command:
+To run supershush, simply execute the `supershush` command:
 
 ```bash
-audstopper
+supershush
 ```
 
-This will start the AudStopper daemon, which will monitor audio output changes and stop audio playback when necessary.
+This will start the SuperShush daemon, which will monitor audio output changes and stop audio playback when necessary.
 
 # Configuring
 
-To configure AudStopper, you can edit the configuration file located at `~/.config/audstopper/config.toml`. Here is an example configuration file:
+To configure SuperShush, you can edit the configuration file located at `~/.config/supershush/config.toml`. Here is an example configuration file:
 
 ```toml
 # Resume audio after you change output back
@@ -37,6 +37,7 @@ To configure AudStopper, you can edit the configuration file located at `~/.conf
 # Example: audio is playing on audio 1 and then you switch to
 #          audio 2, the audio gets paused. after you switch
 #          back to audio 1, the audio gets unmuted.
+resume = false
 
 # Enable MPC pausing 
 mpc = false
@@ -47,8 +48,8 @@ playerctl = true
 
 # License
  
-AudStopper is licensed under the MIT License. See the LICENSE file for more information.
+SuperShush is licensed under the MIT License. See the LICENSE file for more information.
 
 # Contributing
  
-If you'd like to contribute to AudStopper, please fork the repository and submit a pull request with your changes. You can also report issues or suggest new features on the issue tracker.
+If you'd like to contribute to SuperShush, please fork the repository and submit a pull request with your changes. You can also report issues or suggest new features on the issue tracker.
