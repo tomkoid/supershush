@@ -32,6 +32,12 @@ This will start the AudStopper daemon, which will monitor audio output changes a
 To configure AudStopper, you can edit the configuration file located at `~/.config/audstopper/config.toml`. Here is an example configuration file:
 
 ```toml
+# Resume audio after you change output back
+# WARNING: This feature is not stable yet. The current implementation has big issues.
+# Example: audio is playing on audio 1 and then you switch to
+#          audio 2, the audio gets paused. after you switch
+#          back to audio 1, the audio gets unmuted.
+
 # Enable MPC pausing 
 mpc = false
 
