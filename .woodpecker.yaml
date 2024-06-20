@@ -1,0 +1,6 @@
+steps:
+  - name: build
+    image: golang
+    commands:
+      - go get
+      - go build
